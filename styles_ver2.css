@@ -190,7 +190,7 @@ h3 {
 }
 
 .hero-actions {
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
   margin-top: 26px;
 }
@@ -634,6 +634,28 @@ body {
   background: rgba(255, 255, 255, 0.92);
 }
 
+.hero-actions .primary-btn,
+.hero-actions .secondary-btn {
+  min-height: 48px;
+  border-radius: 10px;
+  padding: 0 13px;
+  font-size: 0.94rem;
+  box-shadow: 0 14px 30px rgba(20, 44, 44, 0.12);
+}
+
+.hero-actions .secondary-btn {
+  border: 2px solid rgba(20, 44, 44, 0.18);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.hero-actions .primary-btn::after,
+.hero-actions .secondary-btn::after {
+  content: ">";
+  margin-left: 8px;
+  font-size: 0.9em;
+  font-weight: 900;
+}
+
 h1 {
   max-width: 760px;
   font-size: clamp(3.2rem, 7vw, 5.1rem);
@@ -696,24 +718,24 @@ h1 {
 }
 
 .student-context {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .student-context span {
-  min-height: 46px;
-  display: flex;
+  min-height: 34px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(23, 33, 60, 0.08);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
-  color: #283a36;
-  font-size: 0.9rem;
+  border: 1px dashed rgba(216, 94, 73, 0.42);
+  border-radius: 999px;
+  background: rgba(255, 247, 237, 0.72);
+  color: #7a3b27;
+  padding: 0 13px;
+  font-size: 0.82rem;
   font-weight: 900;
-  box-shadow: 0 14px 34px rgba(20, 44, 44, 0.08);
   text-align: center;
 }
 
@@ -723,6 +745,11 @@ h1 {
   }
 
   .student-context {
-    grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .student-context span {
+    border-radius: 10px;
   }
 }
