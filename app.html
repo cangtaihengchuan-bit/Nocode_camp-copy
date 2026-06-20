@@ -113,7 +113,7 @@
       h1 {
         max-width: 760px;
         margin: 14px 0 12px;
-        font-size: 4.1rem;
+        font-size: clamp(2rem, 5vw, 4.4rem);
         line-height: 1.05;
         letter-spacing: 0;
         overflow-wrap: anywhere;
@@ -426,13 +426,13 @@
       }
 
       .detail-head h2 {
-        font-size: 2.25rem;
+        font-size: clamp(1.55rem, 3vw, 2.4rem);
         letter-spacing: 0;
       }
 
       .item-form {
         display: grid;
-        grid-template-columns: minmax(170px, 1.2fr) 122px minmax(210px, 1.15fr) minmax(170px, 1fr) auto;
+        grid-template-columns: minmax(170px, 1.1fr) 122px minmax(260px, 1.25fr) minmax(170px, 1fr) auto;
         gap: 10px;
         align-items: end;
         margin: 18px 0;
@@ -442,13 +442,44 @@
         background: var(--surface-soft);
       }
 
+      .sale-field {
+        min-width: 0;
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .sale-field legend {
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 800;
+        padding: 0;
+      }
+
       .sale-options {
         display: grid;
-        grid-template-columns: 110px 1fr;
+        grid-template-columns: 1fr;
         gap: 8px;
       }
 
+      .schedule-label {
+        display: grid;
+        gap: 5px;
+      }
+
+      .schedule-label span {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 850;
+      }
+
       .schedule-field.hidden {
+        display: none;
+      }
+
+      .schedule-label.hidden {
         display: none;
       }
 
@@ -574,10 +605,6 @@
           word-break: break-all;
         }
 
-        .detail-head h2 {
-          font-size: 1.55rem;
-        }
-
         .lead {
           max-width: calc(100vw - 74px);
           font-size: 0.96rem;
@@ -633,6 +660,10 @@
           url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=78") center / cover fixed;
       }
 
+      .app {
+        padding-top: 18px;
+      }
+
       .hero,
       .status,
       .stores,
@@ -645,8 +676,10 @@
       }
 
       .hero {
-        grid-template-columns: minmax(0, 0.95fr) minmax(310px, 0.45fr);
+        position: relative;
+        overflow: hidden;
         align-items: center;
+        grid-template-columns: minmax(0, 0.95fr) minmax(310px, 0.45fr);
       }
 
       .hero-controls {
@@ -676,6 +709,16 @@
         font-weight: 700;
       }
 
+      .proof-list div,
+      .metric-card {
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .proof-list dt,
+      .metric-card strong {
+        color: #142c2c;
+      }
+
       .btn-primary {
         background: #142c2c;
         box-shadow: 0 14px 30px rgba(20, 44, 44, 0.18);
@@ -683,6 +726,11 @@
 
       .btn-primary:hover {
         background: #0f2424;
+      }
+
+      .btn-ghost,
+      .chip {
+        background: rgba(255, 255, 255, 0.92);
       }
 
       .chip.active,
@@ -853,27 +901,39 @@
                 価格
                 <input id="itemPrice" type="number" min="0" step="1" placeholder="198" required />
               </label>
-              <label>
-                セール設定
+              <fieldset class="sale-field">
+                <legend>セール設定</legend>
                 <div class="sale-options">
-                  <select id="saleMode">
-                    <option value="once">単発</option>
-                    <option value="weekly">毎週</option>
-                    <option value="monthly">毎月</option>
-                  </select>
-                  <input id="saleDate" class="schedule-field" type="date" required />
-                  <select id="saleWeekday" class="schedule-field hidden">
-                    <option value="0">日曜日</option>
-                    <option value="1">月曜日</option>
-                    <option value="2">火曜日</option>
-                    <option value="3">水曜日</option>
-                    <option value="4">木曜日</option>
-                    <option value="5">金曜日</option>
-                    <option value="6">土曜日</option>
-                  </select>
-                  <input id="saleMonthDay" class="schedule-field hidden" type="number" min="1" max="31" step="1" placeholder="例: 15" />
+                  <label class="schedule-label" for="saleMode">
+                    <span>周期</span>
+                    <select id="saleMode">
+                      <option value="once">単発</option>
+                      <option value="weekly">毎週</option>
+                      <option value="monthly">毎月</option>
+                    </select>
+                  </label>
+                  <label id="saleDateWrap" class="schedule-label" for="saleDate">
+                    <span>日付</span>
+                    <input id="saleDate" class="schedule-field" type="date" required />
+                  </label>
+                  <label id="saleWeekdayWrap" class="schedule-label hidden" for="saleWeekday">
+                    <span>曜日</span>
+                    <select id="saleWeekday" class="schedule-field">
+                      <option value="0">日曜日</option>
+                      <option value="1">月曜日</option>
+                      <option value="2">火曜日</option>
+                      <option value="3">水曜日</option>
+                      <option value="4">木曜日</option>
+                      <option value="5">金曜日</option>
+                      <option value="6">土曜日</option>
+                    </select>
+                  </label>
+                  <label id="saleMonthDayWrap" class="schedule-label hidden" for="saleMonthDay">
+                    <span>日にち</span>
+                    <input id="saleMonthDay" class="schedule-field" type="number" min="1" max="31" step="1" placeholder="例: 15" />
+                  </label>
                 </div>
-              </label>
+              </fieldset>
               <label>
                 メモ
                 <input id="itemNote" type="text" placeholder="例: アプリ会員限定" />
@@ -888,53 +948,10 @@
     </main>
 
     <script>
-      const STORAGE_KEY = "kaimono-clock-app-test-v1";
-      const DISCOUNTS_API_URL = "./discounts.json";
-      const INITIAL_NOTES = {
-        "sample-supermarket-1": [
-          {
-            id: "sample-note-milk",
-            storeName: "駅前サンプルスーパー",
-            storeType: "supermarket",
-            name: "牛乳 1000ml",
-            price: 138,
-            saleMode: "weekly",
-            saleDate: "",
-            saleWeekday: "2",
-            saleMonthDay: "",
-            note: "朝食用。2本まで",
-            createdAt: "2026/6/16"
-          },
-          {
-            id: "sample-note-rice",
-            storeName: "駅前サンプルスーパー",
-            storeType: "supermarket",
-            name: "パックご飯 5食",
-            price: 498,
-            saleMode: "monthly",
-            saleDate: "",
-            saleWeekday: "0",
-            saleMonthDay: "10",
-            note: "テスト期間用にストック",
-            createdAt: "2026/6/16"
-          }
-        ],
-        "sample-drugstore-1": [
-          {
-            id: "sample-note-contact",
-            storeName: "サンプルドラッグ中央店",
-            storeType: "drugstore",
-            name: "コンタクト洗浄液",
-            price: 472,
-            saleMode: "once",
-            saleDate: "2026-06-25",
-            saleWeekday: "0",
-            saleMonthDay: "",
-            note: "なくなる前に買う",
-            createdAt: "2026/6/16"
-          }
-        ]
-      };
+      const SUPABASE_URL = "https://wnxphjricowzxbkwnmjx.supabase.co";
+      const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndueHBoanJpY293enhia3dubWp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5MDk5ODMsImV4cCI6MjA5NzQ4NTk4M30.p6lu6gNpdkTg0Nvnxj05m2tHbYeihYP7jFPdIEWfSxo";
+      const SUPABASE_TABLE = "store_discounts";
 
       const state = {
         stores: [],
@@ -998,8 +1015,11 @@
         itemName: document.querySelector("#itemName"),
         itemPrice: document.querySelector("#itemPrice"),
         saleMode: document.querySelector("#saleMode"),
+        saleDateWrap: document.querySelector("#saleDateWrap"),
         saleDate: document.querySelector("#saleDate"),
+        saleWeekdayWrap: document.querySelector("#saleWeekdayWrap"),
         saleWeekday: document.querySelector("#saleWeekday"),
+        saleMonthDayWrap: document.querySelector("#saleMonthDayWrap"),
         saleMonthDay: document.querySelector("#saleMonthDay"),
         itemNote: document.querySelector("#itemNote"),
         notes: document.querySelector("#notes"),
@@ -1014,35 +1034,118 @@
         return state.notes;
       }
 
-      async function loadNotesFromFile() {
-        const cachedNotes = localStorage.getItem(STORAGE_KEY);
-        if (cachedNotes) {
-          try {
-            state.notes = JSON.parse(cachedNotes);
-            setStatus("ready", "このブラウザ内に保存された割引情報を読み込みました。");
-            return;
-          } catch {
-            localStorage.removeItem(STORAGE_KEY);
-          }
-        }
+      function supabaseHeaders(extra = {}) {
+        return {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          "Content-Type": "application/json",
+          ...extra,
+        };
+      }
 
+      async function supabaseRequest(path, options = {}) {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+          ...options,
+          headers: supabaseHeaders(options.headers || {}),
+        });
+        if (!response.ok) {
+          const message = await response.text();
+          throw new Error(message || `Supabase request failed: ${response.status}`);
+        }
+        if (response.status === 204) return null;
+        return response.json();
+      }
+
+      function rowToNote(row) {
+        return {
+          id: row.id,
+          storeName: row.store_name,
+          storeType: row.store_type,
+          name: row.item_name,
+          price: Number(row.price),
+          saleMode: row.sale_mode || "once",
+          saleDate: row.sale_date || "",
+          saleWeekday: row.sale_weekday == null ? "0" : String(row.sale_weekday),
+          saleMonthDay: row.sale_month_day == null ? "" : String(row.sale_month_day),
+          note: row.note || "",
+          createdAt: row.created_at ? new Date(row.created_at).toLocaleDateString("ja-JP") : "",
+        };
+      }
+
+      function noteToRow(storeId, note) {
+        return {
+          id: note.id,
+          store_id: storeId,
+          store_name: note.storeName,
+          store_type: note.storeType,
+          item_name: note.name,
+          price: note.price,
+          sale_mode: note.saleMode || "once",
+          sale_date: note.saleMode === "once" && note.saleDate ? note.saleDate : null,
+          sale_weekday: note.saleMode === "weekly" ? Number(note.saleWeekday) : null,
+          sale_month_day: note.saleMode === "monthly" ? Number(note.saleMonthDay) : null,
+          note: note.note || null,
+        };
+      }
+
+      function groupRows(rows) {
+        return rows.reduce((grouped, row) => {
+          grouped[row.store_id] = grouped[row.store_id] || [];
+          grouped[row.store_id].push(rowToNote(row));
+          return grouped;
+        }, {});
+      }
+
+      function flattenNotes(notes) {
+        return Object.entries(notes).flatMap(([storeId, items]) => items.map((item) => noteToRow(storeId, item)));
+      }
+
+      async function loadNotesFromSupabase() {
+        const rows = await supabaseRequest(`${SUPABASE_TABLE}?select=*&order=created_at.desc`);
+        state.notes = groupRows(rows || []);
+        setStatus("ready", "Supabaseから保存済みの割引情報を読み込みました。");
+      }
+
+      async function migrateLocalBackupIfEmpty() {
+        if (Object.values(state.notes).flat().length) return;
         try {
-          const response = await fetch(DISCOUNTS_API_URL, { cache: "no-store" });
-          if (!response.ok) throw new Error("discounts.jsonを読み込めませんでした。");
-          state.notes = await response.json();
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.notes));
-          setStatus("ready", "discounts.json からサンプル割引情報を読み込みました。追加したメモはこのブラウザ内に保存されます。");
+          const response = await fetch("./discounts.json", { cache: "no-store" });
+          if (!response.ok) return;
+          const backup = await response.json();
+          const rows = flattenNotes(backup);
+          if (!rows.length) return;
+          await supabaseRequest(SUPABASE_TABLE, {
+            method: "POST",
+            headers: { Prefer: "return=minimal" },
+            body: JSON.stringify(rows),
+          });
+          state.notes = backup;
+          setStatus("ready", "ローカルJSONの既存データをSupabaseへ移行しました。");
         } catch {
-          state.notes = structuredClone(INITIAL_NOTES);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.notes));
-          setStatus("ready", "組み込みサンプルの割引情報を読み込みました。追加したメモはこのブラウザ内に保存されます。");
+          setStatus("error", "Supabaseへの初回移行に失敗しました。テーブル作成SQLを確認してください。");
         }
       }
 
-      function saveNotes(notes) {
-        state.notes = notes;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-        setStatus("ready", "メモをこのブラウザ内に保存しました。");
+      async function insertNoteToSupabase(storeId, note) {
+        await supabaseRequest(SUPABASE_TABLE, {
+          method: "POST",
+          headers: { Prefer: "return=minimal" },
+          body: JSON.stringify(noteToRow(storeId, note)),
+        });
+      }
+
+      async function deleteNoteFromSupabase(noteId) {
+        await supabaseRequest(`${SUPABASE_TABLE}?id=eq.${encodeURIComponent(noteId)}`, {
+          method: "DELETE",
+          headers: { Prefer: "return=minimal" },
+        });
+      }
+
+      async function clearNotesFromSupabase() {
+        await supabaseRequest(`${SUPABASE_TABLE}?id=not.is.null`, {
+          method: "DELETE",
+          headers: { Prefer: "return=minimal" },
+        });
       }
 
       function notesFor(storeId) {
@@ -1071,9 +1174,9 @@
 
       function syncScheduleFields() {
         const mode = elements.saleMode.value;
-        elements.saleDate.classList.toggle("hidden", mode !== "once");
-        elements.saleWeekday.classList.toggle("hidden", mode !== "weekly");
-        elements.saleMonthDay.classList.toggle("hidden", mode !== "monthly");
+        elements.saleDateWrap.classList.toggle("hidden", mode !== "once");
+        elements.saleWeekdayWrap.classList.toggle("hidden", mode !== "weekly");
+        elements.saleMonthDayWrap.classList.toggle("hidden", mode !== "monthly");
         elements.saleDate.required = mode === "once";
         elements.saleWeekday.required = mode === "weekly";
         elements.saleMonthDay.required = mode === "monthly";
@@ -1256,11 +1359,17 @@
               <button class="delete-btn" type="button">削除</button>
             </div>
           `;
-          card.querySelector(".delete-btn").addEventListener("click", () => {
+          card.querySelector(".delete-btn").addEventListener("click", async () => {
             const allNotes = loadNotes();
             allNotes[store.id] = notesFor(store.id).filter((item) => item.id !== note.id);
-            saveNotes(allNotes);
+            state.notes = allNotes;
             render();
+            try {
+              await deleteNoteFromSupabase(note.id);
+              setStatus("ready", "Supabaseから割引情報を削除しました。");
+            } catch {
+              setStatus("error", "Supabaseからの削除に失敗しました。テーブル権限を確認してください。");
+            }
           });
           elements.notes.appendChild(card);
         });
@@ -1330,43 +1439,60 @@
         });
       });
 
-      elements.itemForm.addEventListener("submit", (event) => {
+      elements.itemForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const store = state.stores.find((item) => item.id === state.selectedStoreId);
         if (!store) return;
 
         const allNotes = loadNotes();
+        const newNote = {
+          id: crypto.randomUUID(),
+          storeName: store.name,
+          storeType: store.type,
+          name: elements.itemName.value.trim(),
+          price: Number(elements.itemPrice.value),
+          saleMode: elements.saleMode.value,
+          saleDate: elements.saleDate.value,
+          saleWeekday: elements.saleWeekday.value,
+          saleMonthDay: elements.saleMonthDay.value,
+          note: elements.itemNote.value.trim(),
+          createdAt: new Date().toLocaleDateString("ja-JP"),
+        };
         allNotes[store.id] = [
-          {
-            id: crypto.randomUUID(),
-            storeName: store.name,
-            storeType: store.type,
-            name: elements.itemName.value.trim(),
-            price: Number(elements.itemPrice.value),
-            saleMode: elements.saleMode.value,
-            saleDate: elements.saleDate.value,
-            saleWeekday: elements.saleWeekday.value,
-            saleMonthDay: elements.saleMonthDay.value,
-            note: elements.itemNote.value.trim(),
-            createdAt: new Date().toLocaleDateString("ja-JP"),
-          },
+          newNote,
           ...(allNotes[store.id] || []),
         ];
-        saveNotes(allNotes);
+        state.notes = allNotes;
         elements.itemForm.reset();
         syncScheduleFields();
         render();
+        try {
+          await insertNoteToSupabase(store.id, newNote);
+          setStatus("ready", "Supabaseへ割引情報を保存しました。");
+        } catch {
+          setStatus("error", "Supabaseへの保存に失敗しました。テーブル作成SQLとRLSポリシーを確認してください。");
+        }
       });
 
-      elements.clearAllBtn.addEventListener("click", () => {
-        localStorage.removeItem(STORAGE_KEY);
-        saveNotes({});
-        setStatus("ready", "このブラウザ内の価格メモを削除しました。");
+      elements.clearAllBtn.addEventListener("click", async () => {
+        state.notes = {};
         render();
+        try {
+          await clearNotesFromSupabase();
+          setStatus("ready", "Supabase上の保存済み価格メモを全削除しました。");
+        } catch {
+          setStatus("error", "Supabaseの全削除に失敗しました。テーブル権限を確認してください。");
+        }
       });
 
       async function initializeApp() {
-        await loadNotesFromFile();
+        try {
+          await loadNotesFromSupabase();
+          await migrateLocalBackupIfEmpty();
+        } catch {
+          state.notes = {};
+          setStatus("error", "Supabaseから読み込めませんでした。supabase_schema.sql を実行済みか確認してください。");
+        }
         syncScheduleFields();
         render();
       }
