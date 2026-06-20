@@ -592,6 +592,132 @@
           grid-template-columns: 1fr;
         }
       }
+      .back-link {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(23, 33, 60, 0.08);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #243834;
+        padding: 0 12px;
+        font-size: 0.88rem;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .student-modes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .student-modes span {
+        min-height: 34px;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(23, 33, 60, 0.08);
+        border-radius: 8px;
+        background: #fff7ed;
+        color: #753b25;
+        padding: 0 10px;
+        font-size: 0.82rem;
+        font-weight: 900;
+      }
+
+      body {
+        background:
+          linear-gradient(135deg, rgba(255, 246, 232, 0.9) 0%, rgba(237, 250, 245, 0.92) 44%, rgba(238, 246, 255, 0.94) 100%),
+          url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=2200&q=78") center / cover fixed;
+      }
+
+      .hero,
+      .status,
+      .stores,
+      .workspace,
+      .metric-card,
+      .note-card {
+        border-color: rgba(23, 33, 60, 0.08);
+        background: rgba(255, 255, 255, 0.93);
+        box-shadow: 0 14px 34px rgba(20, 44, 44, 0.08);
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 0.95fr) minmax(310px, 0.45fr);
+        align-items: center;
+      }
+
+      .hero-controls {
+        align-self: center;
+        padding: 18px;
+        border: 1px solid rgba(23, 33, 60, 0.08);
+        border-top: 4px solid var(--coral);
+        border-radius: 8px;
+        background: rgba(249, 251, 250, 0.94);
+        box-shadow: 0 14px 34px rgba(20, 44, 44, 0.08);
+      }
+
+      .brand {
+        color: #d85e49;
+      }
+
+      .brand-mark {
+        background: linear-gradient(140deg, var(--mint), var(--coral));
+      }
+
+      h1 {
+        color: #142c2c;
+      }
+
+      .lead {
+        color: #263936;
+        font-weight: 700;
+      }
+
+      .btn-primary {
+        background: #142c2c;
+        box-shadow: 0 14px 30px rgba(20, 44, 44, 0.18);
+      }
+
+      .btn-primary:hover {
+        background: #0f2424;
+      }
+
+      .chip.active,
+      .type-pill {
+        background: #fff7ed;
+        color: #753b25;
+      }
+
+      .stores,
+      .workspace {
+        border-top: 4px solid var(--mint);
+      }
+
+      .workspace {
+        border-top-color: var(--coral);
+      }
+
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .student-modes {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .student-modes span {
+          justify-content: center;
+          text-align: center;
+          white-space: normal;
+        }
+      }
     </style>
   </head>
   <body>
@@ -601,6 +727,7 @@
           <div class="brand">
             <span class="brand-mark">K</span>
             <span>Kaimono Clock</span>
+            <a class="back-link" href="./index_ver2.html">LPへ戻る</a>
           </div>
           <h1>
             <span>バイト代も</span>
@@ -614,6 +741,12 @@
             <span>品物の価格とセール日を保存して、</span>
             <span>必要なものを安いタイミングで見返せます。</span>
           </p>
+          <div class="student-modes" aria-label="学生生活で使う場面">
+            <span>学校帰り</span>
+            <span>バイト前</span>
+            <span>ひとり暮らし</span>
+            <span>今月の予算確認</span>
+          </div>
           <dl class="proof-list" aria-label="主なメリット">
             <div>
               <dt>1タップ</dt>
