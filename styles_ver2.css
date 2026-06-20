@@ -656,6 +656,42 @@ body {
   font-weight: 900;
 }
 
+.app-cta {
+  position: relative;
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, #ff765d, #d85e49);
+  box-shadow: 0 16px 34px rgba(216, 94, 73, 0.24);
+}
+
+.header-cta.app-cta {
+  border: 0;
+  padding: 0 18px;
+}
+
+.hero-actions .app-cta {
+  min-height: 54px;
+  padding: 0 18px;
+  font-size: 1rem;
+}
+
+.hero-actions .app-cta::before {
+  content: "DEMO";
+  min-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  padding: 0 8px;
+  margin-right: 10px;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.hero-actions .app-cta::after {
+  content: ">";
+}
+
 h1 {
   max-width: 760px;
   font-size: clamp(3.2rem, 7vw, 5.1rem);
